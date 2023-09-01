@@ -23,8 +23,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get clean
 
 RUN python3 -m pip install --upgrade pip cffi && \
-    pip install ansible==${ANSIBLE_CORE} && \
-    pip install mitogen==0.2.10 ansible-lint==${ANSIBLE_LINT} jmespath && \
+    pip install ansible && \
+    pip install mitogen ansible-lint jmespath && \
     pip install --upgrade pywinrm && \
     rm -rf /root/.cache/pip
 
@@ -34,4 +34,6 @@ RUN mkdir /ansible && \
 
 WORKDIR /ansible
 
-CMD [ "ansible-playbook", "--version" ]
+#CMD [ "ansible-playbook", "--version" ]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+
